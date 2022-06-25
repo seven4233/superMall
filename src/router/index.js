@@ -1,6 +1,8 @@
 import VueRouter from "vue-router";
 import Vue from "vue";
 
+
+import Home from '@/views/TheHome.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -14,7 +16,15 @@ const router = new VueRouter({
         },
         {
             path: '/home',
-            component: () => import('@/views/TheHome.vue')
+            component: Home,
+            children: [
+                {
+                    name: 'Detail',
+                    path: 'detail/:id',
+                    component: () => import('@/views/home/TheDetail.vue')
+                },
+            ]
+
         },
         {
             path: '/category',
@@ -27,7 +37,17 @@ const router = new VueRouter({
         {
             path: '/profile',
             component: () => import('@/views/TheProfile.vue')
+        },
+
+    ],
+
+    scrollBehavior(to, from, savedPosition) {
+        // ...
+        if (savedPosition) {
+            return savedPosition
+        } else {
+            return { top: 0, left: 0 }
         }
-    ]
+    }
 })
 export default router
