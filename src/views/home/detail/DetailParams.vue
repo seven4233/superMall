@@ -2,9 +2,9 @@
   <div class="params">
     <div class="info">
       <div class="key">
-        {{ itemParams.info.key }}
+        {{ itemParamsInfo.key }}
       </div>
-      <table v-for="(item, index1) in itemParams.info.set" :key="index1">
+      <table v-for="(item, index1) in itemParamsInfo.set" :key="index1">
         <tr>
           <td>{{ item.key }}</td>
           <td>{{ item.value }}</td>
@@ -14,9 +14,9 @@
 
     <div class="rule">
       <div class="key">
-        {{ itemParams.rule.key }}
+        {{ itemParamsRule.key }}
       </div>
-      <table v-for="(table, index1) in itemParams.rule.tables" :key="index1">
+      <table v-for="(table, index1) in itemParamsRule.tables" :key="index1">
         <tr v-for="(item, index) in table" :key="index">
           <td>{{ item[0] }}</td>
           <td>{{ item[1] }}</td>
@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  props: ['itemParams'],
+  props: ['itemParamsInfo', 'itemParamsRule'],
 };
 </script>
 

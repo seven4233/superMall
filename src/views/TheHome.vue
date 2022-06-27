@@ -4,7 +4,13 @@
 
     <div v-else>
       <!-- 导航栏 -->
-      <van-nav-bar title="购物街" left-text="返回" left-arrow fixed placeholder>
+      <van-nav-bar
+        title="钱很多？"
+        left-text="返回"
+        left-arrow
+        fixed
+        placeholder
+      >
         <template #right>
           <van-icon name="search" size="24" />
         </template>

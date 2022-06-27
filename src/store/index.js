@@ -17,8 +17,11 @@ export default new Vuex.Store({
         shopInfo: {},
         columns: [],
         detailInfo: {},
-        itemParams: {},
-        rate: {}
+        itemParamsInfo: {},
+        itemParamsRule: {},
+        rate: {},
+        skuInfo: {},
+        cartData: []
     },
     mutations: {
         getHomeData(state, payload) {
@@ -31,11 +34,17 @@ export default new Vuex.Store({
             state.shopInfo = payload.shopInfo
             state.columns = payload.columns
             state.detailInfo = payload.detailInfo
-            state.itemParams = payload.itemParams
+            state.itemParamsInfo = payload.itemParams.info
+            state.itemParamsRule = payload.itemParams.rule
             state.rate = payload.rate
+            state.skuInfo = payload.skuInfo
+            state.skuInfo_defaultPrice = payload.skuInfo.defaultPrice
         },
         getRecommend(state, payload) {
             state.detail_recommends = payload
+        },
+        cartData(state, payload) {
+            state.cartData.push(payload)
         }
     },
     actions: {
@@ -47,15 +56,22 @@ export default new Vuex.Store({
         async getDetail({ commit }, payload) {
 
             let result = await getDetail(payload.id)
-            // console.log(result.data.result)
+            console.log(result.data.result.skuInfo)
             commit('getDetail', result.data.result)
         },
         async getRecommend({ commit }) {
 
             let result = await getRecommend()
-            console.log(result.data.data.list)
             commit('getRecommend', result.data.data.list)
+        },
+
+        // 购物车数据
+        cartData({ commit }, payload) {
+            commit('cartData', payload)
+            console.log(payload)
         }
+
+
     },
 
 
@@ -80,14 +96,23 @@ export default new Vuex.Store({
         detailInfo(state) {
             return state.detailInfo
         },
-        itemParams(state) {
-            return state.itemParams
+        itemParamsInfo(state) {
+            return state.itemParamsInfo
+        },
+        itemParamsRule(state) {
+            return state.itemParamsRule
         },
         rate(state) {
             return state.rate
         },
         detail_recommends(state) {
             return state.detail_recommends
+        },
+        skuInfo(state) {
+            return state.skuInfo
+        },
+        cartData(state) {
+            return state.cartData
         }
 
     }
